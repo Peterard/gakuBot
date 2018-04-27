@@ -1,2 +1,1 @@
-# gakuBot
-gakuBot: Machine learning game
+# finding-the-target
