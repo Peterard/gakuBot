@@ -35,7 +35,7 @@ let playProcess;
 let movementProcess;
 
 const headerText = ["Gakubot Mimic", "Rules", "How to play", "Strategy", "Other versions"];
-const titleText = ["This is a machine learning game", "There are three main rules to this game", "Movement", "How will you play?", "Com vs Com"];
+const titleText = ["This is a machine learning game", "There are three main rules to this game", "Movement", "How will you play?", ""];
 const contentText = ["You play against the computer, and the computer (theoretically) gets better as you play",
 "<ol>\
   <li>You are a yellow circle. Your aim is to get home to the brown circle in the middle.</li>\
@@ -44,8 +44,9 @@ const contentText = ["You play against the computer, and the computer (theoretic
 </ol>",
 "You move via clicking in the direction that you want to move in. A red reticule should appear wherever you click on the screen. Your yellow circle will move (quite slowly) in that direction",
 "Will you make a beeline for the target? Will you be agressive and first seek to subdue your opponent by tagging them before going towards the objective? And what will the computer do?",
-"If you would like to relax and watch two computers duel it out instead, then please feel free to try the <a href='../train_com_test_com/index.html'>Com vs Com Version</a><br><br>\
-If you want to go head to head against the bots without the hassle of having to watch them get better slowly, then go ahead and try at <a href='../train_com_test_player/index.html'>Bot vs Player Version</a>"];
+"If you would like to relax and watch two computers duel it out instead, then please feel free to try <a href='../exhibit/exhibit.html'>Gakubot Exhibit</a><br><br>\
+ If you want to teach the bots how you play by playing against them, try <a href='../apprentice/apprentice.html'>Gakubot Apprentice</a><br><br>\
+ If you want to go head to head against bots who practice hours of simulated games in minutes, then check out <a href='../formulate/formulate.html'>Gakubot Formulate</a>"];
 const buttonText = ["Rules ▶", "Guide ▶", "Strategy ▶", "Versions ▶", "Train"];
 
 let pageNumber = 0;

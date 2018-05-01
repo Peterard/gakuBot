@@ -40,7 +40,7 @@ let playProcess;
 let movementProcess;
 
 const headerText = ["Gakubot Formulate", "Rules", "How to play", "Strategy", "Other versions"];
-const titleText = ["This is a machine learning game", "There are three main rules to this game", "Movement", "How will you play?", "Com vs Com"];
+const titleText = ["This is a machine learning game", "There are three main rules to this game", "Movement", "How will you play?", ""];
 const contentText = ["You play against the computer, and the computer (theoretically) gets better as you play",
 "<ol>\
   <li>You are a yellow circle. Your aim is to get home to the brown circle in the middle.</li>\
@@ -49,13 +49,11 @@ const contentText = ["You play against the computer, and the computer (theoretic
 </ol> <br> That's it, good luck!",
 "You move via clicking in the direction that you want to move in. A red reticule should appear wherever you click on the screen. Your yellow circle will move (quite slowly) in that direction",
 "Will you make a beeline for the target? Will you be agressive and first seek to subdue your opponent by tagging them before going towards the objective? And what will the computer do?",
-"If you would like to relax and watch two computers duel it out instead, then please feel free to try the <a href='../train_com_test_com/index.html'>Com vs Com Version</a><br><br>\
- Alternatively, if you want to teach the bots how you play by playing against them, go ahead at <a href='../train_player_test_player/index.html'>Bot vs Player (Learning) Version</a>. Be warned, the bots are not fast learners."];
+"If you would like to relax and watch two computers duel it out instead, then please feel free to try <a href='../exhibit/exhibit.html'>Gakubot Exhibit</a><br><br>\
+If you want to teach the bots how you play by playing against them, try <a href='../apprentice/apprentice.html'>Gakubot Apprentice</a><br><br>\
+ And if you want to play against a bot which will attempt to mimic your movements, then have go at <a href='../mimic/mimic.html'>Gakubot Mimic</a>"];
 const buttonText = ["Rules ▶", "Guide ▶", "Strategy ▶", "Versions ▶", "Train"];
 
-const nextPage = function(){
-
-}
 
 let pageNumber = 0;
 let pageNumberLimit = 4;
@@ -84,8 +82,7 @@ if(isSavedDataAvailable){
   });
 }
 
-// run this in 500ms (1 second)
-document.getElementById("progress-button").addEventListener("click", function(e){
+const nextPage = function(e){
   e.preventDefault();
   if(pageNumber < pageNumberLimit){
     document.getElementById("progress-button-load").classList.add("d-none");
@@ -95,10 +92,14 @@ document.getElementById("progress-button").addEventListener("click", function(e)
     $("#canvas-overlay .card-text").html(contentText[pageNumber]);
     $("#canvas-overlay #progress-button").html(buttonText[pageNumber]);
   }else{
-    $("#canvas-overlay").hide();
+    document.getElementById("progress-button").removeEventListener("click", nextPage);
+    document.getElementById("canvas-overlay").classList.add("d-none");
     trainComPlayHuman();
   }
-});
+};
+
+// run this in 500ms (1 second)
+document.getElementById("progress-button").addEventListener("click", nextPage);
 
 // run this in 500ms (1 second)
 document.getElementById("play-again-button").addEventListener("click", function(e){
@@ -147,6 +148,28 @@ var gameFinish = function(){
     document.getElementById("continue-canvas-overlay").classList.add("d-none");
     trainComPlayHuman();
   }
+}
+
+const roundReadyHeaderText = "Ready";
+const roundReadyTitleText = "Gakubot had trained and is now ready to play you";
+const roundReadyButtonText = "Play";
+
+var roundReady = function(){
+  document.getElementById("canvas-overlay").classList.remove("d-none");
+  $("#canvas-overlay .card-header h2").html(roundReadyHeaderText);
+  $("#canvas-overlay .card-title").html(roundReadyTitleText);
+  $("#canvas-overlay .card-text").html("Gakubot simulated training time this round: <br><b>" + Math.round((5 * genetic.numberOfEvolutionsEachRound)/60) + " mins approx</b> <br><br> Gakubot simulated training time total: <b><br>"  + Math.round((5 * genetic.evolutionIteration)/60) + " mins approx</b>");
+  $("#canvas-overlay #progress-button").html(roundReadyButtonText);
+
+  const startRound = function(e){
+    e.preventDefault();
+    document.getElementById("progress-button").removeEventListener("click", startRound);
+    document.getElementById("canvas-overlay").classList.add("d-none");
+    genetic.userControlled = true;
+    genetic.play();
+  }
+
+  document.getElementById("progress-button").addEventListener("click", startRound);
 }
 
 //genetic.play();

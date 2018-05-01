@@ -10,8 +10,6 @@ var trainComPlayCom = function(){
   }else{
     genetic.evolutionIteration += 1;
 
-    genetic.userControlled = false;
-
     genetic.play();
   }
 };
@@ -26,11 +24,12 @@ var trainComPlayHuman = function(){
     drawProgressText(Math.round(100*(genetic.evolutionIteration % (genetic.numberOfEvolutionsEachRound + 5)) / (genetic.numberOfEvolutionsEachRound)));
     let thisGenome = genetic;
     setTimeout(trainComPlayHuman, 1);
+  }else if(genetic.evolutionIteration % (genetic.numberOfEvolutionsEachRound + 5) === genetic.numberOfEvolutionsEachRound){
+    genetic.evolutionIteration += 1;
+    roundReady();
   }else{
     genetic.evolutionIteration += 1;
-
     genetic.userControlled = true;
-
     genetic.play();
   }
 };
@@ -45,8 +44,11 @@ var trainHumanPlayHuman = function(){
     drawProgressText( Math.round(100*(genetic.evolutionIteration / genetic.numberOfEvolutionsBeforePlayerOnlyLearning)));
     let thisGenome = genetic;
     setTimeout(trainHumanPlayHuman, 1);
-
+  }else if(genetic.evolutionIteration === genetic.numberOfEvolutionsBeforePlayerOnlyLearning){
+    genetic.evolutionIteration += 1;
+    roundReady();
   }else{
+    genetic.evolutionIteration += 1;
     genetic.genomeIndex = genetic.neat.population.length - 1;
     genetic.iterateGeneration();
     genetic.setInitialPositionValue();

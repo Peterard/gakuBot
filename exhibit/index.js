@@ -40,7 +40,7 @@ let playProcess;
 let movementProcess;
 
 const headerText = ["GakuBot Exhibit", "Rules", "Strategy", "Other versions"];
-const titleText = ["This is a machine learning game", "There are three main rules to this game", "How will they play?", "Bot vs Player"];
+const titleText = ["This is a machine learning game", "There are three main rules to this game", "How will they play?", ""];
 const contentText = ["One bot plays against another, and they should (theoretically) both get better as they play",
 "<ol>\
   <li>The bots are yellow and pink circles. Their aim is to get home to the brown circle in the middle.</li>\
@@ -48,8 +48,9 @@ const contentText = ["One bot plays against another, and they should (theoretica
   <li>If they touch or 'tag' their opponent, then the bot which is closest to home when they touch is unable to move for a few seconds.</li>\
 </ol>",
 "Will they make a beeline for the target? Will they be agressive and first seek to subdue your opponent by tagging them before going towards the objective? How will their strategy develop?",
-"If you want to go head to head against the bots, go ahead and try at <a href='../train_com_test_player/index.html'>Bot vs Player Version</a> <br><br>\
- Alternatively, if you want to teach the bots how you play by playing against them, go ahead at <a href='../train_player_test_player/index.html'>Bot vs Player (Learning) Version</a>. Be warned, the bots are not fast learners."];
+"If you want to go head to head against bots who practice hours of simulated games in minutes, then check out <a href='../formulate/formulate.html'>Gakubot Formulate</a><br><br>\
+ If you want to teach the bots how you play by playing against them, try <a href='../apprentice/apprentice.html'>Gakubot Apprentice</a><br><br>\
+ And if you want to play against a bot which will attempt to mimic your movements, then have go at <a href='../mimic/mimic.html'>Gakubot Mimic</a>"];
 const buttonText = ["Rules ▶", "Strategy ▶", "Versions ▶", "Train"];
 
 const nextPage = function(){

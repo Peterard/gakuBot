@@ -40,7 +40,7 @@ let playProcess;
 let movementProcess;
 
 const headerText = ["Gakubot Apprentice", "Rules", "How to play", "Strategy", "Other versions"];
-const titleText = ["This is a machine learning game", "There are three main rules to this game", "Movement", "How will you play?", "Com vs Com"];
+const titleText = ["This is a machine learning game", "There are three main rules to this game", "Movement", "How will you play?", ""];
 const contentText = ["You play against the computer, and the computer (theoretically) gets better as you play",
 "<ol>\
   <li>You are a yellow circle. Your aim is to get home to the brown circle in the middle.</li>\
@@ -49,8 +49,9 @@ const contentText = ["You play against the computer, and the computer (theoretic
 </ol>",
 "You move via clicking in the direction that you want to move in. A red reticule should appear wherever you click on the screen. Your yellow circle will move (quite slowly) in that direction",
 "Will you make a beeline for the target? Will you be agressive and first seek to subdue your opponent by tagging them before going towards the objective? And what will the computer do?",
-"If you would like to relax and watch two computers duel it out instead, then please feel free to try the <a href='../train_com_test_com/index.html'>Com vs Com Version</a><br><br>\
-If you want to go head to head against the bots without the hassle of having to watch them get better slowly, then go ahead and try at <a href='../train_com_test_player/index.html'>Bot vs Player Version</a>"];
+"If you would like to relax and watch two computers duel it out instead, then please feel free to try <a href='../exhibit/exhibit.html'>Gakubot Exhibit</a><br><br>\
+If you want to go head to head against bots who practice hours of simulated games in minutes, then check out <a href='../formulate/formulate.html'>Gakubot Formulate</a><br><br>\
+And if you want to play against a bot which will attempt to mimic your movements, then have a go at <a href='../mimic/mimic.html'>Gakubot Mimic</a>"];
 const buttonText = ["Rules ▶", "Guide ▶", "Strategy ▶", "Versions ▶", "Train"];
 
 let pageNumber = 0;
@@ -122,4 +123,29 @@ var roundOver = function(){
   document.getElementById("post-game-results-lost").innerHTML = "Lost: " + Math.round((100 * (noOfLosses / noOfGames))) + "% (" + noOfLosses + "/" + noOfGames + ")";
   document.getElementById("post-game-results-won-bar").style.width = Math.round(100 * (noOfWins / noOfGames)) + "%";
   document.getElementById("post-game-results-lost-bar").style.width = Math.round(100 * (noOfLosses / noOfGames)) + "%";
+}
+
+const roundReadyHeaderText = "Ready";
+const roundReadyTitleText = "Gakubot had trained and is now ready to play you";
+const roundReadyButtonText = "Play";
+
+var roundReady = function(){
+  document.getElementById("canvas-overlay").classList.remove("d-none");
+  $("#canvas-overlay .card-header h2").html(roundReadyHeaderText);
+  $("#canvas-overlay .card-title").html(roundReadyTitleText);
+  $("#canvas-overlay .card-text").html("Gakubot simulated training time this round: <br><b>" + Math.round((5 * genetic.numberOfEvolutionsEachRound)/60) + " mins approx</b> <br><br> Gakubot simulated training time total: <b><br>"  + Math.round((5 * genetic.evolutionIteration)/60) + " mins approx</b>");
+  $("#canvas-overlay #progress-button").html(roundReadyButtonText);
+
+  const startRound = function(e){
+    e.preventDefault();
+    document.getElementById("progress-button").removeEventListener("click", startRound);
+    document.getElementById("canvas-overlay").classList.add("d-none");
+    genetic.genomeIndex = genetic.neat.population.length - 1;
+    genetic.iterateGeneration();
+    genetic.setInitialPositionValue();
+
+    genetic.prepareDuel();
+  }
+
+  document.getElementById("progress-button").addEventListener("click", startRound);
 }

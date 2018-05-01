@@ -41,7 +41,7 @@
 
   .price li {
       border-bottom: 1px solid #eee;
-      padding: 20px;
+      padding: 12px;
       text-align: center;
       vertical-align: middle;
   }
@@ -62,14 +62,18 @@
   }
 
   .strategy-row{
-      min-height:113px;
+    padding:8px;
   }
 
   .training-row{
-    min-height: 89px;
+    padding: 8px;
   }
 
-  @media only screen and (max-width: 600px) {
+  nav{
+    border-radius: 5px;
+  }
+
+  @media only screen and (max-width: 768px) {
       .columns {
           width: 100%;
       }
@@ -80,7 +84,7 @@
 <body>
   <div class="container my-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">GakuBot</a>
+      <a class="navbar-brand" href="index.html">GakuBot</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -129,7 +133,7 @@
                 <li> Trains against itself </li>
                 <li class="training-row"> Plays against you </li>
                 <li class="strategy-row"> Training strategy: Survival of the fittest </li>
-                <li> Difficulty: ★★★ </li>
+                <li style="padding-left:0px; padding-right:0px;"> Difficulty: ★★★ </li>
                 <li> <a href="#" class="btn">More Info</a> </li>
                 <li class="grey"><a href="#" class="btn btn-primary">Play</a></li>
               </ul>
@@ -163,7 +167,7 @@
               <ul class="price">
                 <li class="header"> GakuBot <br> Exhibit </li>
                 <li> Trains against itself </li>
-                <li class="training-row"> Plays against itself (but still visible) </li>
+                <li class="training-row" style="padding-left:0px; padding-right:0px;"> Plays against itself (visible)</li>
                 <li class="strategy-row"> Training strategy: Survival of the fittest </li>
                 <li> Difficulty: N/A </li>
                 <li> <a href="#" class="btn">More Info</a> </li>
@@ -178,9 +182,9 @@
 
   <!-- Jumbotron Header -->
   <div class="container">
-    <header class="jumbotron my-5" style="background-color: darkgrey: color:white;">
+    <header class="jumbotron my-5" style="background-color: darkslategrey; color:white;">
       <h1 class="display-3">About the game</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+      <p class="lead">Find out more about how the AI of the game teach themselves how to play, and why this game is particularly interesting to apply an AI to.</p>
       <a href="#" class="btn btn-primary btn-lg">Read more</a>
     </header>
   </div>
