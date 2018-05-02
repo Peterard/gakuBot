@@ -9,7 +9,7 @@ function Mimic(){
   timeSteps: 110,
   maxInitialDistance: 20,
   minDistance: 1.9,
-  tagDistance: 1.3,
+  tagDistance: 1.5,
   cooldownTimer: 20,
   startDelay: 50,
   maxSpeed: 0.2,
@@ -34,7 +34,7 @@ function Mimic(){
   currentOpponentPosition: [],
   trainingData: [],
   generatePopulation: function () {
-    this.opponentNetwork = new Architect.Liquid(6, 25, 4, 50, 20);
+    this.opponentNetwork = new Architect.Liquid(6, 25, 2, 50, 20);
 
     this.trainingData = mimicTrainingData; //initial training data just to get the thing started (1 round x 5 goes)
   },
@@ -160,10 +160,8 @@ function Mimic(){
     let opponentOutputRaw = this.opponentNetwork.activate(inputStimuli);
 
     let opponentMovement = [];
-    const opponentOutputXSign = opponentOutputRaw[2] > 0.5 ? 1 : -1;
-    const opponentOutputYSign = opponentOutputRaw[3] > 0.5 ? 1 : -1;
-    opponentMovement[0] = opponentOutputXSign * opponentOutputRaw[0] * this.maxSpeed;
-    opponentMovement[1] = opponentOutputYSign * opponentOutputRaw[1] * this.maxSpeed;
+    opponentMovement[0] = (opponentOutputRaw[0] * 2 * this.maxSpeed) - this.maxSpeed;
+    opponentMovement[1] = (opponentOutputRaw[1] * 2 * this.maxSpeed) - this.maxSpeed;
 
     output[0] = notNAElseZero(output[0]);
     output[1] = notNAElseZero(output[1]);
@@ -184,10 +182,8 @@ function Mimic(){
     inputTrainingStimuli.push(relativeOpponentPosition[1]);
 
     let givenOutput = output.slice();
-    givenOutput[2] = givenOutput[0] >= 0 ? 1 : 0;
-    givenOutput[3] = givenOutput[1] >= 0 ? 1 : 0;
-    givenOutput[0] = Math.abs(givenOutput[0] / this.maxSpeed);
-    givenOutput[1] = Math.abs(givenOutput[1] / this.maxSpeed);
+    givenOutput[0] = (givenOutput[0] / (2 * this.maxSpeed)) + 0.5;
+    givenOutput[1] = (givenOutput[1] / (2 * this.maxSpeed)) + 0.5;
 
     this.trainingData.push({
       input: inputTrainingStimuli,
@@ -282,7 +278,10 @@ function Mimic(){
     drawPregameOverlayText(pregameTimer, 255 - Math.round(255 * (pregameTimerRaw - pregameTimer)));
   },
   evolve: function () {
-    const learningRate = .1;
+
+    console.log(JSON.stringify(this.trainingData));
+    const learningRate = .3;
+
     for(let i in this.trainingData){
       this.opponentNetwork.activate(this.trainingData[i].input);
       this.opponentNetwork.propagate(learningRate, this.trainingData[i].output);

@@ -158,9 +158,9 @@ var roundReady = function(){
   document.getElementById("canvas-overlay").classList.remove("d-none");
   $("#canvas-overlay .card-header h2").html(roundReadyHeaderText);
   $("#canvas-overlay .card-title").html(roundReadyTitleText);
-  $("#canvas-overlay .card-text").html("Gakubot simulated training time this round: <br><b>" + Math.round((5 * genetic.numberOfEvolutionsEachRound)/60) + " mins approx</b> <br><br> Gakubot simulated training time total: <b><br>"  + Math.round((5 * genetic.evolutionIteration)/60) + " mins approx</b>");
+  $("#canvas-overlay .card-text").html("Gakubot simulated training time this round: <br><b>" + Math.round((5 * genetic.neat.population.length * genetic.numberOfEvolutionsEachRound)/60) + " mins approx</b> <br><br> Gakubot simulated training time total: <b><br>"  + Math.round((5 * genetic.neat.population.length * genetic.evolutionIteration)/60) + " mins approx</b>");
   $("#canvas-overlay #progress-button").html(roundReadyButtonText);
-
+  genetic.evolutionIteration += 1;
   const startRound = function(e){
     e.preventDefault();
     document.getElementById("progress-button").removeEventListener("click", startRound);

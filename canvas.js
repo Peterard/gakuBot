@@ -106,9 +106,8 @@ function Canvas(canvas) {
 
 }
 
-var drawOnCanvas = function(input){
-    new Canvas(cvs).clear().setColor("fill", "brown").setColor("stroke", "brown").circle(0,0,input,true,true).setColor("fill", "yellow").setColor("stroke", "yellow").circle(11,11,input,true,true);
-}
+const userDefaultColor = "#dfc12a";
+const opponentDefaultColor = "pink";
 
 var clearCanvas = function(){
     new Canvas(cvs).clear();
@@ -123,7 +122,7 @@ var drawTwoCircles = function(firstCircleX, firstCircleY, secondCircleX, secondC
     const secondX = width * secondCircleX;
     const secondY = height * secondCircleY;
 
-    new Canvas(cvs).clear().setColor("fill", "brown").setColor("stroke", "brown").circle(firstX,firstY,20,true,true).setColor("fill", "yellow").setColor("stroke", "green").circle(secondX, secondY,10,true,true);
+    new Canvas(cvs).clear().setColor("fill", "brown").setColor("stroke", "brown").circle(firstX,firstY,20,true,true).setColor("fill", userDefaultColor).setColor("stroke", "green").circle(secondX, secondY,10,true,true);
 }
 
 var drawThreeCircles = function(firstCircleX, firstCircleY, secondCircleX, secondCircleY, thirdCircleX, thirdCircleY, playerCooldown, opponentCooldown){
@@ -136,18 +135,19 @@ var drawThreeCircles = function(firstCircleX, firstCircleY, secondCircleX, secon
     const secondY = height * secondCircleY;
     const thirdX = width * thirdCircleX;
     const thirdY = height * thirdCircleY;
-    const smallCircleRadius = width/30;
+    const smallCircleRadius = width/25;
     const largeCircleRadius = width/15;
-    const playerColor = playerCooldown <= 0 ? "yellow" : "rgb(100, 100, 0)";
-    const opponentColor = opponentCooldown <= 0 ? "pink" : "rgb(153, 0, 26)";
+    const playerColor = playerCooldown <= 0 ? userDefaultColor : "rgb(100, 100, 0)";
+    const opponentColor = opponentCooldown <= 0 ? opponentDefaultColor : "rgb(153, 0, 26)";
 
     const canvas = new Canvas(cvs);
     canvas.setColor("fill", "brown").setColor("stroke", "brown").circle(firstX,firstY,largeCircleRadius,true,true);
-    canvas.setColor("fill", playerColor).setColor("stroke", "green").circle(secondX, secondY,smallCircleRadius,true,true);
-    canvas.setColor("fill", opponentColor).setColor("stroke", "blue").circle(thirdX, thirdY,smallCircleRadius,true,true);
+    canvas.setColor("fill", playerColor).setColor("stroke", "green").circle(secondX, secondY,smallCircleRadius,true,false);
+    canvas.setColor("fill", opponentColor).setColor("stroke", "blue").circle(thirdX, thirdY,smallCircleRadius,true,false);
 }
 
 var drawFourCircles = function(firstCircleX, firstCircleY, secondCircleX, secondCircleY, thirdCircleX, thirdCircleY, fourthCircleX, fourthCircleY, playerCooldown, opponentCooldown){
+
     var width = cvs.width;
     var height = cvs.height;
 
@@ -159,10 +159,10 @@ var drawFourCircles = function(firstCircleX, firstCircleY, secondCircleX, second
     const thirdY = height * thirdCircleY;
     const fourthX = width * fourthCircleX;
     const fourthY = height * fourthCircleY;
-    const smallCircleRadius = width/30;
+    const smallCircleRadius = width/25;
     const largeCircleRadius = width/15;
-    const playerColor = playerCooldown <= 0 ? "yellow" : "rgb(100, 100, 0)";
-    const opponentColor = opponentCooldown <= 0 ? "pink" : "rgb(153, 0, 26)";
+    const playerColor = playerCooldown <= 0 ? userDefaultColor : "rgb(100, 100, 0)";
+    const opponentColor = opponentCooldown <= 0 ? opponentDefaultColor : "rgb(153, 0, 26)";
 
     const canvas = new Canvas(cvs);
     canvas.setColor("fill", "brown").setColor("stroke", "brown").circle(firstX,firstY,largeCircleRadius,true,true);
@@ -171,8 +171,8 @@ var drawFourCircles = function(firstCircleX, firstCircleY, secondCircleX, second
     canvas.setColor("stroke", "red").line(fourthX, fourthY - smallCircleRadius, fourthX, fourthY - smallCircleRadius/2);
     canvas.setColor("stroke", "red").line(fourthX + smallCircleRadius, fourthY, fourthX + smallCircleRadius/2, fourthY);
     canvas.setColor("stroke", "red").line(fourthX - smallCircleRadius, fourthY, fourthX - smallCircleRadius/2, fourthY);
-    canvas.setColor("fill", playerColor).setColor("stroke", "green").circle(secondX, secondY,smallCircleRadius,true,true);
-    canvas.setColor("fill", opponentColor).setColor("stroke", "blue").circle(thirdX, thirdY,smallCircleRadius,true,true);
+    canvas.setColor("fill", playerColor).setColor("stroke", "green").circle(secondX, secondY,smallCircleRadius,true,false);
+    canvas.setColor("fill", opponentColor).setColor("stroke", "blue").circle(thirdX, thirdY,smallCircleRadius,true,false);
 }
 
 var drawText = function(inputText){
@@ -204,7 +204,7 @@ var drawFinish = function(homeOriginX, homeOriginY, finishTimer, finishTimerDura
   const largeCircleRadius = height * (finishTimer / finishTimerDuration);
   const firstX = homeOriginX * width;
   const firstY = homeOriginY * height;
-  const color = gameResultWin ? "yellow" : gameResultLoss ? "pink" : "grey";
+  const color = gameResultWin ? userDefaultColor : gameResultLoss ? opponentDefaultColor : "grey";
 
   const canvas = new Canvas(cvs);
   canvas.setColor("fill", color).setColor("stroke", color).circle(firstX,firstY,largeCircleRadius,true,true);

@@ -47,7 +47,7 @@ const contentText = ["You play against the computer, and the computer (theoretic
 "If you would like to relax and watch two computers duel it out instead, then please feel free to try <a href='../exhibit/exhibit.html'>Gakubot Exhibit</a><br><br>\
  If you want to teach the bots how you play by playing against them, try <a href='../apprentice/apprentice.html'>Gakubot Apprentice</a><br><br>\
  If you want to go head to head against bots who practice hours of simulated games in minutes, then check out <a href='../formulate/formulate.html'>Gakubot Formulate</a>"];
-const buttonText = ["Rules ▶", "Guide ▶", "Strategy ▶", "Versions ▶", "Train"];
+const buttonText = ["Rules ▶", "Guide ▶", "Strategy ▶", "Versions ▶", "Play"];
 
 let pageNumber = 0;
 let pageNumberLimit = 4;

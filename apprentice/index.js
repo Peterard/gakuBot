@@ -81,7 +81,7 @@ if(isSavedDataAvailable){
   });
 }
 
-document.getElementById("progress-button").addEventListener("click", function(e){
+const nextPage = function(e){
   e.preventDefault();
   if(pageNumber < pageNumberLimit){
     document.getElementById("progress-button-load").classList.add("d-none");
@@ -91,10 +91,13 @@ document.getElementById("progress-button").addEventListener("click", function(e)
     $("#canvas-overlay .card-text").html(contentText[pageNumber]);
     $("#canvas-overlay #progress-button").html(buttonText[pageNumber]);
   }else{
-    $("#canvas-overlay").hide();
+    document.getElementById("progress-button").removeEventListener("click", nextPage);
+    document.getElementById("canvas-overlay").classList.add("d-none");
     trainHumanPlayHuman();
   }
-});
+}
+
+document.getElementById("progress-button").addEventListener("click", nextPage);
 
 document.getElementById("play-again-button").addEventListener("click", function(e){
   e.preventDefault();
@@ -133,8 +136,9 @@ var roundReady = function(){
   document.getElementById("canvas-overlay").classList.remove("d-none");
   $("#canvas-overlay .card-header h2").html(roundReadyHeaderText);
   $("#canvas-overlay .card-title").html(roundReadyTitleText);
-  $("#canvas-overlay .card-text").html("Gakubot simulated training time this round: <br><b>" + Math.round((5 * genetic.numberOfEvolutionsEachRound)/60) + " mins approx</b> <br><br> Gakubot simulated training time total: <b><br>"  + Math.round((5 * genetic.evolutionIteration)/60) + " mins approx</b>");
+  $("#canvas-overlay .card-text").html("Gakubot simulated training time total: <b><br>"  + Math.round((5 * genetic.neat.population.length * genetic.evolutionIteration)/60) + " mins approx</b>");
   $("#canvas-overlay #progress-button").html(roundReadyButtonText);
+  genetic.evolutionIteration += 1;
 
   const startRound = function(e){
     e.preventDefault();
@@ -143,7 +147,6 @@ var roundReady = function(){
     genetic.genomeIndex = genetic.neat.population.length - 1;
     genetic.iterateGeneration();
     genetic.setInitialPositionValue();
-
     genetic.prepareDuel();
   }
 

@@ -25,7 +25,6 @@ var trainComPlayHuman = function(){
     let thisGenome = genetic;
     setTimeout(trainComPlayHuman, 1);
   }else if(genetic.evolutionIteration % (genetic.numberOfEvolutionsEachRound + 5) === genetic.numberOfEvolutionsEachRound){
-    genetic.evolutionIteration += 1;
     roundReady();
   }else{
     genetic.evolutionIteration += 1;
@@ -45,7 +44,6 @@ var trainHumanPlayHuman = function(){
     let thisGenome = genetic;
     setTimeout(trainHumanPlayHuman, 1);
   }else if(genetic.evolutionIteration === genetic.numberOfEvolutionsBeforePlayerOnlyLearning){
-    genetic.evolutionIteration += 1;
     roundReady();
   }else{
     genetic.evolutionIteration += 1;
