@@ -113,20 +113,42 @@
       </div>
       <div id="how-do-i-play" class="card mb-4 p-3">
         <h1>How do I play?</h1>
-        <p>Your character is a yellow circle. You move it by clicking to where you would like it to go to, and it will start moving in that direction.</p><br>
-        <p>Your aim is to get "home" (the brown circle in teh middle of the screen) before your opponent, the pink circle, does.</p><br>
-        <p>The only other mechanic of the game is that you can "tag" your opponent by touching them. Once you tag them, the one of you who is closest to home is frozen still for a few seconds. Therefore, be wary of pulling out ahead of your opponent in case they tag you and romp on home to victory.</p><br>
-        <p>For the best introduction, it is recommended that beginners start at <a href="formulate/formulate.html">GakuBot Formulate</a></p><br>
+        <p>Your character is a yellow circle. <img class="mx-4" src="images/player.png" alt="What you look like"></p>
+        <p><img class="float-left mx-2" src="images/home.png" alt="What your objective looks like">Your aim is to get "home" (the brown circle in the middle of the screen) before your opponent, the pink circle, does.<img class="float-right mx-2" src="images/opponent.png" alt="What your opponent looks like"></p>
+        <p><img class="float-left mx-2" src="images/movement.png" alt="What your objective looks like">You move it by clicking to where you would like it to go to, and it will start moving in that direction.</p><br>
+        <p><img class="float-right mx-2" src="images/tagged.png" alt="What 'tagging' looks like">The only other mechanic of the game is that you can "tag" your opponent by touching them. Once you tag them, the one of you who is closest to home is frozen still for a few seconds. Therefore, be wary of pulling out ahead of your opponent in case they tag you and romp on home to victory.</p><br>
+        <p>For the best introduction, it is recommended that beginners start at <a href="formulate/formulate.html">GakuBot Formulate</a></p>
+        <p class="text-center"><a href="formulate/formulate.html" class="btn btn-primary">Play now</a></p>
         <p>Once you are satisfied with the mechanics of the game, feel free to check out the <a href="#versions">other versions</a> of this game.</p><br>
       </div>
       <div id="how-does-it-work" class="card mb-4 p-3">
         <h1>How does it work?</h1>
         <p>This game works by using neural networks to make decisions in the game.</p><br>
-        <p>For and introduction to neural networks, <a href="https://ujjwalkarn.me/2016/08/09/quick-intro-neural-networks/">read this.</a></p><br>
-        <p>The neural networks in this game have their position and the opponents position fed into them as inputs, and then output a direction in which to move.</p><br>
+        <p>In very basic terms, a neural network is a set of nodes which have inputs connected to them, and produce a certain output if the given inputs are high enough or low enough. This output can then either be connected to other nodes (hence, it is a network), or it can be the fina output of said network. For and introduction to how neural networks work, <a href="https://ujjwalkarn.me/2016/08/09/quick-intro-neural-networks/">read this.</a></p><br>
+        <p>The neural networks in this game have their position and the opponent's position fed into them as inputs, and then output a direction in which to move.</p><br>
         <p>There are two main ways in which we train these networks: supervised training and unsupervised training.</p><br>
-        <h3>Supervised training</h3>
-        <p>Supervised training in this game consitutes</p>
+        <h3 id="unsupervised-learning">Unsupervised training</h3>
+        <p>Unsupervised training in this game works by letting the bot play the game by itself, and then appraising its performance.</p>
+        <p>To start, 50 bots are created, and are all randomly assigned a neural network structure. So, for example, some bots will move towards the objective, some will move away, and others will not move at all.</p>
+        <p>The performance of these 50 bots is then scored, with bots that end up close to the objective getting a high score, and bots that end up far getting a low score.</p>
+        <div class="m-auto w-100 my-3"><div class="w-75 text-center m-auto my-3" ><img class="w-100 my-3 mb-5" src="images/score.png" alt="How the bots are scored"></div></div>
+        <p>Then, the horde of bots is evolved, with the highest scoring bots remaining unchanged, and then the rest of the next genetaion of bots are greated by taking two "parents" from the current generation, randomly mixing their networks together, and then adding this offspring to the next generation of bots. The whole next generation is then mutated, after which the cycle of testing, evaluation, selection, reproduction and mutation begins again.</p>
+        <div class="m-auto w-100"><div class="m-auto w-75 text-center font-weight-light" ><img class="w-100" src="images/genetic.png" alt="The cycle of a genetic algorithm">Courtesy of <a href="https://blog.sicara.com/getting-started-genetic-algorithms-python-tutorial-81ffa1dd72f9">blog.sicara.com</a></div></div><br>
+        <p>This way, the bots that perform best laregly persist through many generations, with the ones that perform poorly replaced by randomly mutated offspring of the previous generation. This evolution is called a genetic algorithm, and more can be found out about it <a href="https://blog.sicara.com/getting-started-genetic-algorithms-python-tutorial-81ffa1dd72f9">here.</a></p>
+        <h3 id="supervised-learning">Supervised training</h3>
+        <p>Like the unsupervised learning bots, Gakubot's supervised learning bots also use a neural network to make their decisions.</p>
+        <p>However, the way that this bot learns is markedly different to the unsupervised learning bot.</p>
+        <p>This bot observes the player playing 5 rounds of the game, and uses the player's actions as a guide for how to play the game.</p>
+        <p>The bot first receives the input that the player recieves at any one moment (i.e. the player's location and the opponents location) and then is told to make a guess as to what it should do in that situation.</p>
+        <p>Then, the bot's guess is compared against the action the playeractually carried out.</p>
+        <p>If the guess is the same as the player's action, then no change of the network is required. However, if the guess is not close to the player's action, then the network will be altered in such a way as to nudge it closer to producing an answer similar to the player's action.</p>
+        <p>This process is repeated over thousands of user actions, and slowly the nudges to improve the network make it start to produce output similar to the player's. This process is called <a href="https://brilliant.org/wiki/backpropagation/">backpropagation.</a></p><br>
+        <h3>How they compare</h3>
+        <p>The pros and cons for both supervised and unsupervised learning for a task such as playing against a human competitor are numerous.</p>
+        <p>For unsupervised learning, the main strength is that there is a possibility that a bot will create a strategy that is much better than any that their human counterpart can devise, and be highly successful in the game.</p>
+        <p>The main weakness is that this could take many iterations to happen, and due to the random nature of the mutation of the networks, there is the possibility that this will not occur at all.</p>
+        <p>For supervised learning, the main strength is that the learning can be done very cheaply and quickly, simply taking the user input as a blueprint for how to play.</p>
+        <p>The main weakness is that this puts an upper bound on the proficiency of the bot, only allowing it to be as good as the human facing it.</p><br>
 
       </div>
       <div id="why-is-it-interesting" class="card mb-4 p-3">
@@ -137,26 +159,30 @@
         <h1>What Versions of GakuBot exist?</h1>
         <div id="gb-formulate" class="mb-4 p-3">
           <h2>GakuBot Formulate</h2>
-          <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+          <p>GakuBot Formulate is an <a href="#unsupervised-learning">unsupervised learning algorithmn</a>, whereby the computers plays against itself thousands of times in order to learn how to play.</p>
+          <img class="w-100" src="images/GBFormulate.png" alt="How GakuBot Formulate works">
         </div>
         <div id="gb-apprentice" class="mb-4 p-3">
           <h2>GakuBot Apprentice</h2>
           <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+          <img class="w-100" src="images/GBApprentice.png" alt="How GakuBot Apprentice works">
         </div>
         <div id="gb-mimic" class="mb-4 p-3">
           <h2>GakuBot Mimic</h2>
           <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+          <div class="w-50 m-auto"><img class="w-100" src="images/GBMimic.png" alt="How GakuBot Mimic works"></div>
         </div>
         <div id="gb-exhibit" class="mb-4 p-3">
           <h2>GakuBot Exhibit</h2>
           <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+          <img class="w-100" src="images/GBExhibit.png" alt="How GakuBot Exhibit works">
         </div>
       </div>
       <div id="who-made-gakubot" class="card mb-4 p-3">
         <h1>Who made GakuBot (and why)?</h1>
         <p>The purpose of this game was for it to be both <span class="font-weight-bold">fun</span> and <span class="font-weight-bold">educational</span></p>
         <p>Exactly determining what qualifies as fun is a difficult task. However, I have personally had a bit of fun both making and playing this game. I hope you do to.</p>
-        <p>As for the educational aspects of this game, I hope that anyone who plays this game comes away with either a better understanding of how AI works, or an urge to learn more. Moreover, I hope that this game is enlightening in that it can show what a modern AI is capable of.</p>
+        <p>As for the educational aspects of this game, I hope that anyone who plays this game comes away with either a better understanding of how AI works, or an urge to learn more. More than anything, I hope that this game simply shows what a modern AI is capable of.</p>
       </div>
       <div id="contact" class="card mb-4 p-3">
         <h1>Contact</h1>

@@ -278,13 +278,14 @@ function Mimic(){
     drawPregameOverlayText(pregameTimer, 255 - Math.round(255 * (pregameTimerRaw - pregameTimer)));
   },
   evolve: function () {
-
-    console.log(JSON.stringify(this.trainingData));
     const learningRate = .3;
+    const noOfRepetitions = 50;
 
-    for(let i in this.trainingData){
-      this.opponentNetwork.activate(this.trainingData[i].input);
-      this.opponentNetwork.propagate(learningRate, this.trainingData[i].output);
+    for(let repetition = 0; repetition < noOfRepetitions; repetition++){
+      for(let i in this.trainingData){
+        this.opponentNetwork.activate(this.trainingData[i].input);
+        this.opponentNetwork.propagate(learningRate, this.trainingData[i].output);
+      }
     }
   }
 }

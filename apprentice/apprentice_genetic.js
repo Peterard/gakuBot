@@ -25,7 +25,7 @@ function Genetic(){
   screenYOffset: 0.8,
   evolutionIteration: 0,
   genomeIndex: 0,
-  numberOfEvolutionsBeforePlayerOnlyLearning: 100,
+  numberOfEvolutionsBeforePlayerOnlyLearning: 500,
   animationTimer: 0,
   timeLimit: 400,
   duelCounter: 0,
@@ -44,7 +44,7 @@ function Genetic(){
       2, // number of outputs
       null, // fitnessFunction - in this example we are calculating fitness inside live method
       {
-        elitism: 10, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
+        elitism: 5, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
         popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
@@ -61,7 +61,7 @@ function Genetic(){
       2, // number of outputs
       null, // fitnessFunction - we are calculating fitness inside live method
       {
-        elitism: 10, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
+        elitism: 5, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
         popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/

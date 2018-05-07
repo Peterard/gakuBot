@@ -233,7 +233,7 @@ var drawIterationText = function(inputIteration){
   const canvas = new Canvas(cvs);
   const leftMargin = width/30;
   const topMargin = width/10;
-  canvas.textDraw("AI Rank (out of 20 AI): " + ordinalSuffixOf(inputIteration), leftMargin, height - topMargin, "black");
+  canvas.textDraw("AI Rank (out of 25 AI): " + ordinalSuffixOf(inputIteration), leftMargin, height - topMargin, "black");
 }
 
 var drawPregameOverlayText = function(overlayTimerValue, overlayTimerColorValue){
