@@ -98,8 +98,9 @@ function Mimic(){
     }
   },
   setInitialPositionValue: function(){
-    const playerStartingBearing = 3 * Math.PI/2 - (2 * Math.random() * Math.PI/10  - Math.PI/10) * (2 * Math.round(Math.random()) - 1); //- Math.PI/30 + Math.random() * 2 * Math.PI / 15;
-    const opponentStartingBearing = playerStartingBearing + (2 * Math.round(Math.random() + 1) - 3) * (Math.PI / 18);
+    const playerStartingBearing = 3 * Math.PI/2 + (2 * Math.PI/10  - Math.PI/10) * (2 * Math.round(Math.random()) - 1);
+    const opponentStartingBearingPlusMinus = playerStartingBearing > 3 * Math.PI/2 ? -1 : 1;
+    const opponentStartingBearing = playerStartingBearing + opponentStartingBearingPlusMinus * (Math.PI / 10);
 
     const playerInitialXCoordinate = this.maxInitialDistance * Math.cos(playerStartingBearing);
     const playerInitialYCoordinate = this.maxInitialDistance * Math.sin(playerStartingBearing);
@@ -134,7 +135,6 @@ function Mimic(){
     return ratio;
   },
   timeStep: function(){
-    //TRIG IN HERE a2 = b2 + c2 - 2bc cos A
     const relativeOpponentPosition = [this.currentOpponentPosition[0] - this.currentPosition[0], this.currentOpponentPosition[1] - this.currentPosition[1]];
     const relativePlayerPosition = [this.currentPosition[0] - this.currentOpponentPosition[0], this.currentPosition[1] - this.currentOpponentPosition[1]];
 
@@ -279,7 +279,7 @@ function Mimic(){
   },
   evolve: function () {
     const learningRate = .3;
-    const noOfRepetitions = 50;
+    const noOfRepetitions = 500;
 
     for(let repetition = 0; repetition < noOfRepetitions; repetition++){
       for(let i in this.trainingData){
