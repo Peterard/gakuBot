@@ -279,7 +279,7 @@ function Mimic(){
   },
   evolve: function () {
     const learningRate = .3;
-    const noOfRepetitions = 500;
+    const noOfRepetitions = 250;
 
     for(let repetition = 0; repetition < noOfRepetitions; repetition++){
       for(let i in this.trainingData){

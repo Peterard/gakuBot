@@ -25,7 +25,7 @@ function Genetic(){
   screenYOffset: 0.8,
   evolutionIteration: 0,
   genomeIndex: 0,
-  numberOfEvolutionsBeforePlayerOnlyLearning: 50,
+  numberOfEvolutionsBeforePlayerOnlyLearning: 150,
   animationTimer: 0,
   timeLimit: 400,
   duelCounter: 0,
@@ -116,8 +116,7 @@ function Genetic(){
       this.animationTimer = 0;
 
       this.userControlled = true;
-    }
-    if(this.genomeIndex >= -1){
+
       this.duel();
     }
   },

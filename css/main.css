@@ -89,6 +89,10 @@ body{
   background-color: #e24848;
 }
 
+.under-game-button{
+  min-width:160px;
+}
+
 li.nav-item{
   border-radius: 5px;
   background-color: #e1e6ea;

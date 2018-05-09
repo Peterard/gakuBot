@@ -45,7 +45,7 @@ function Genetic(){
       null, // fitnessFunction - in this example we are calculating fitness inside live method
       {
         elitism: 10, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
-        popsize: 50,
+        popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
           new Architect.Random(
@@ -62,7 +62,7 @@ function Genetic(){
       null, // fitnessFunction - we are calculating fitness inside live method
       {
         elitism: 10, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
-        popsize: 50,
+        popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
           new Architect.Random(
@@ -90,17 +90,15 @@ function Genetic(){
 
       this.userControlled = false;
 
-      for(let repeatCounter = 0; repeatCounter < 1; repeatCounter++){
-        this.initializePositionBeforeTimeStep();
+      this.initializePositionBeforeTimeStep();
 
-        for (let i = 0; i < this.timeSteps; i++){
-          this.timeStep()
-          if(this.finishLoop){
-            break
-          }
+      for (let i = 0; i < this.timeSteps; i++){
+        this.timeStep()
+        if(this.finishLoop){
+          break
         }
-        this.determineFitness();
       }
+      this.determineFitness();
 
       this.userControlled = isUserControlled;
     }

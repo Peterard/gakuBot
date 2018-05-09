@@ -44,7 +44,7 @@ function Genetic(){
       null, // fitnessFunction - in this example we are calculating fitness inside live method
       {
         elitism: 10, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
-        popsize: 50,
+        popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
           new Architect.Random(
@@ -61,7 +61,7 @@ function Genetic(){
       null, // fitnessFunction - we are calculating fitness inside live method
       {
         elitism: 10, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
-        popsize: 50,
+        popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
           new Architect.Random(
@@ -159,7 +159,7 @@ function Genetic(){
     const playerStartingBearing = 3*Math.PI/2 - (2 * Math.random() * Math.PI/10  - Math.PI/10) * (2 * Math.round(Math.random()) - 1); //- Math.PI/30 + Math.random() * 2 * Math.PI / 15;
     const opponentStartingBearingPlusMinus = playerStartingBearing > 3 * Math.PI/2 ? -1 : 1;
     const opponentStartingBearing = playerStartingBearing + opponentStartingBearingPlusMinus * (Math.PI / 10);
-    
+
     const playerInitialXCoordinate = this.maxInitialDistance * Math.cos(playerStartingBearing);
     const playerInitialYCoordinate = this.maxInitialDistance * Math.sin(playerStartingBearing);
     const opponentInitialXCoordinate = this.maxInitialDistance * Math.cos(opponentStartingBearing);
