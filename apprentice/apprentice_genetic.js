@@ -44,7 +44,7 @@ function Genetic(){
       2, // number of outputs
       null, // fitnessFunction - in this example we are calculating fitness inside live method
       {
-        elitism: 5, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
+        elitism: 7, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
         popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
@@ -61,7 +61,7 @@ function Genetic(){
       2, // number of outputs
       null, // fitnessFunction - we are calculating fitness inside live method
       {
-        elitism: 5, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
+        elitism: 7, // this sets how many genomes in population will be passed into next generation without mutation https://www.researchgate.net/post/What_is_meant_by_the_term_Elitism_in_the_Genetic_Algorithm
         popsize: 25,
         mutationRate: 0.3, // sets the mutation rate. If set to 0.3, 30% of the new population will be mutated. Default is 0.3
         network: // https://wagenaartje.github.io/neataptic/docs/architecture/network/
@@ -116,9 +116,9 @@ function Genetic(){
       this.animationTimer = 0;
 
       this.userControlled = true;
-
-      this.duel();
     }
+
+    this.duel();
   },
   duel: function(){
 
@@ -142,7 +142,7 @@ function Genetic(){
 
       var thisGenetic = this;
       setTimeout(function(){thisGenetic.duel() }, 30);
-    } else if(this.finishTimer < this.finishTimerDuration){
+    } else if(!isGenerationFinished && this.finishTimer < this.finishTimerDuration){
       if(this.finishTimer === 0 && this.animationTimer >= this.timeLimit){
           this.gameResultWin = false;
           this.gameResultLoss = this.userControlled === true;
